@@ -1,0 +1,430 @@
+/* Contenedor principal */
+.pet-detail-container {
+    background-color: #f0e68c;
+    display: flex !important;
+    gap: 30px !important;
+    flex-wrap: wrap !important;
+    padding: 20px 0 !important;
+}
+
+.pet-image-column, .pet-info-column {
+    flex: 1 !important;
+    min-width: 300px !important;
+}
+
+/* Slider de imágenes */
+.image-slider-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-slides-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.image-slide {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.image-slide.active {
+    display: block;
+}
+
+.pet-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Botones slider */
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 50%;
+    z-index: 10;
+    transition: background 0.3s;
+}
+
+.slider-button.prev { left: 10px; }
+.slider-button.next { right: 10px; }
+.slider-button:hover { background: rgba(0,0,0,0.7); }
+
+/* Dots slider */
+.slider-dots {
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.dot.active {
+    background: #ff9800;
+    transform: scale(1.2);
+}
+
+/* Header de información */
+.pet-header-info {
+    margin-bottom: 25px !important;
+}
+
+.pet-name-title {
+    font-size: 2rem !important;
+    color: #8B4513 !important;
+    margin-bottom: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.pet-name-title i {
+    color: #ff9800 !important;
+}
+
+.pet-location-text {
+    color: #666 !important;
+    font-size: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+}
+
+.pet-location-text i {
+    color: #ff9800 !important;
+}
+
+/* Sección de datos */
+.pet-data-section {
+    margin-bottom: 25px !important;
+}
+
+.pet-data-section .section-title {
+    font-size: 1.4rem !important;
+    color: #8B4513 !important;
+    margin-bottom: 15px !important;
+    font-weight: 600 !important;
+}
+
+/* ===== GRILLA DE DATOS - MUY IMPORTANTE ===== */
+.data-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 15px !important;
+    margin-top: 15px !important;
+}
+
+.data-box {
+    background: #FFF9E6 !important;
+    border: 2px solid #FFD54F !important;
+    border-radius: 8px !important;
+    padding: 15px !important;
+    text-align: center !important;
+    display: block !important;
+}
+
+.data-main {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    color: #8B4513 !important;
+    margin: 0 0 5px 0 !important;
+    display: block !important;
+}
+
+.data-label {
+    font-size: 0.9rem !important;
+    color: #666 !important;
+    margin: 0 !important;
+    display: block !important;
+}
+
+/* ===== SECCIÓN DE DESCRIPCIÓN ===== */
+.description-section {
+    background: #FFF9E6 !important;
+    border-radius: 12px !important;
+    padding: 25px !important;
+    margin: 25px 0 !important;
+    border: 2px solid #FFD54F !important;
+}
+
+.description-section .section-title {
+    color: #8B4513 !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 15px !important;
+    font-weight: 600 !important;
+}
+
+.description-section .description-text {
+    background: white !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    line-height: 1.8 !important;
+    color: #333 !important;
+    font-size: 1rem !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+}
+
+.description-section .description-text p {
+    margin: 0 !important;
+}
+
+.description-section .description-text .muted {
+    color: #999 !important;
+    font-style: italic !important;
+}
+
+/* ===== SECCIÓN DE SALUD ===== */
+.health-section {
+    margin-bottom: 25px !important;
+}
+
+.health-section .section-title {
+    font-size: 1.4rem !important;
+    color: #8B4513 !important;
+    margin-bottom: 15px !important;
+    font-weight: 600 !important;
+}
+
+.health-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+}
+
+.health-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 12px !important;
+    background: #f5f5f5 !important;
+    border-radius: 8px !important;
+    border-left: 4px solid #4CAF50 !important;
+}
+
+.health-item i {
+    color: #4CAF50 !important;
+    font-size: 1.2rem !important;
+}
+
+.health-item span {
+    color: #333 !important;
+    font-weight: 500 !important;
+}
+
+/* Sección del publicador */
+.publisher-section {
+    margin-bottom: 25px !important;
+}
+
+.publisher-card {
+    background: #f9f9f9 !important;
+    border-radius: 8px !important;
+    padding: 15px !important;
+    border: 1px solid #e0e0e0 !important;
+}
+
+.publisher-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.publisher-info h3 {
+    margin: 0 0 5px 0 !important;
+    color: #333 !important;
+    font-size: 1.1rem !important;
+}
+
+.publisher-role {
+    color: #666 !important;
+    font-size: 0.9rem !important;
+    margin: 0 !important;
+    text-transform: capitalize !important;
+}
+
+.publisher-avatar {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    background: #e0e0e0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.publisher-avatar i {
+    font-size: 1.5rem !important;
+    color: #666 !important;
+}
+
+/* Botón de adopción */
+.adoption-button-section {
+    margin-top: 25px !important;
+}
+
+.btn-adopt {
+    width: 100% !important;
+    padding: 15px 30px !important;
+    background: #ff9800 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: background 0.3s, transform 0.2s !important;
+}
+
+.btn-adopt:hover {
+    background: #f57c00 !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Sección de otras publicaciones */
+.available-pets-section {
+    margin-top: 50px !important;
+}
+
+.section-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+}
+
+.available-pets-section .section-title {
+    font-size: 1.8rem !important;
+    color: #8B4513 !important;
+}
+
+.view-all-link {
+    color: #ff9800 !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+}
+
+.view-all-link:hover {
+    text-decoration: underline !important;
+}
+
+.pet-cards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.pet-card {
+    background: white !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    transition: transform 0.3s, box-shadow 0.3s !important;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+
+.pet-card-image {
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+}
+
+.pet-card-info {
+    padding: 15px !important;
+}
+
+.pet-card-species-tag {
+    background: #ff9800 !important;
+    color: white !important;
+    padding: 4px 12px !important;
+    border-radius: 12px !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+}
+
+.pet-card-name {
+    margin: 10px 0 !important;
+    color: #333 !important;
+    font-size: 1.2rem !important;
+}
+
+.pet-card-details {
+    color: #666 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+}
+
+.pet-card-details i {
+    color: #ff9800 !important;
+    margin-right: 5px !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pet-detail-container {
+        flex-direction: column !important;
+    }
+    
+    .data-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .description-section {
+        padding: 20px !important;
+    }
+    
+    .description-section .description-text {
+        padding: 15px !important;
+        font-size: 0.95rem !important;
+    }
+    
+    .pet-cards-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .data-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .pet-name-title {
+        font-size: 1.5rem !important;
+    }
+}

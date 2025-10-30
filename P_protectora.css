@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fef9e7;
+    color: #5c3d2e;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+
+/* Main Content */
+.main-content {
+    padding: 40px 0;
+    min-height: 60vh;
+}
+
+.profile-section {
+    background-color: #f0e68c;
+    border-radius: 20px;
+    padding: 50px;
+    margin-bottom: 40px;
+}
+
+.profile-header {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.profile-image {
+    width: 220px;              /* Tamaño fijo del recuadro */
+    height: 220px;
+    border-radius: 50%;        /* Imagen circular */
+    overflow: hidden;          /* Evita que sobresalga */
+    border: 4px solid #e6b17e; /* Borde decorativo */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;         /* Mantiene proporciones sin deformar */
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profile-title h1 {
+    font-size: 36px;
+    color: #8b5a3c;
+    font-weight: bold;
+}
+
+.badge {
+    display: inline-block;
+    background-color: #ff8c42;
+    color: white;
+    padding: 8px 22px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.badge-caregiver {
+    background-color: #ff8c42;
+}
+
+.location {
+    color: #ff8c42;
+    font-size: 17px;
+    margin-bottom: 18px;
+    font-weight: 500;
+}
+
+.person-charge {
+    font-weight: bold;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #d4c5a9;
+    font-size: 16px;
+}
+
+.stats {
+    display: flex;
+    gap: 80px;
+    margin-top: 25px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #b8b8b8;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #b8b8b8;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.info-box h2 {
+    color: #ff8c42;
+    font-size: 26px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.content-placeholder {
+    background-color: white;
+    height: 200px;
+    border-radius: 15px;
+}
+
+.contact-list {
+    list-style: none;
+}
+
+.contact-list li {
+    padding: 15px 0;
+    font-size: 17px;
+    color: #ff8c42;
+    font-weight: bold;
+}
+
+/* Sección de otras publicaciones */
+.available-pets-section {
+    margin-top: 50px !important;
+}
+
+.section-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+}
+
+.available-pets-section .section-title {
+    font-size: 1.8rem !important;
+    color: #8B4513 !important;
+}
+
+.view-all-link {
+    color: #ff9800 !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+}
+
+.view-all-link:hover {
+    text-decoration: underline !important;
+}
+
+.pet-cards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.pet-card {
+    background: white !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    transition: transform 0.3s, box-shadow 0.3s !important;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+
+.pet-card-image {
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+}
+
+.pet-card-info {
+    padding: 15px !important;
+}
+
+.pet-card-species-tag {
+    background: #ff9800 !important;
+    color: white !important;
+    padding: 4px 12px !important;
+    border-radius: 12px !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+}
+
+.pet-card-name {
+    margin: 10px 0 !important;
+    color: #333 !important;
+    font-size: 1.2rem !important;
+}
+
+.pet-card-details {
+    color: #666 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+}
+
+.pet-card-details i {
+    color: #ff9800 !important;
+    margin-right: 5px !important;
+}

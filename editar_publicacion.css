@@ -1,0 +1,62 @@
+/* ... (Se mantiene el estilo del código anterior) ... */
+body { font-family: Arial;
+      background-color: #fef8f0;
+      }
+
+.container { max-width: 600px; 
+      margin: auto; 
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1rem; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+h1 { color: #ff9d3d; 
+      text-align: center; }
+
+form { display: flex; 
+      flex-direction: column; 
+      gap: 1rem; }
+
+label { font-weight: bold; }
+
+input, select, textarea { padding: 0.5rem; 
+      border-radius: 0.5rem; 
+      border: 1px solid #ccc; 
+      width: 100%; }
+
+input[type="checkbox"] { width: auto; }
+
+.btn { background-color: #ff9d3d; 
+      color: #fff; 
+      border: none; 
+      padding: 1rem; 
+      border-radius: 1rem; 
+      cursor: pointer; 
+      font-weight: bold; }
+
+.btn:hover { background-color: #e68a2e; }
+
+.mensaje { text-align:center; 
+      font-weight:bold; 
+      padding: 10px; 
+      border-radius: 5px; 
+      margin-bottom: 1rem;}
+
+.mensaje.success { color: green; 
+      background-color: #e6ffe6; 
+      border: 1px solid green; }
+
+.mensaje.error { color: red; 
+      background-color: #ffe6e6; 
+      border: 1px solid red; }
+
+.imagenes-actuales { display: flex; 
+      flex-wrap: wrap; 
+      gap: 10px; 
+      margin-bottom: 1rem; }
+
+.imagenes-actuales img { width: 80px; 
+      height: 80px; 
+      object-fit: cover; 
+      border-radius: 0.5rem; 
+      border: 1px solid #ccc; }

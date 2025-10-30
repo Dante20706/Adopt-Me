@@ -1,0 +1,109 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fef8f0;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  color: #ff9d3d;
+  text-align: center;
+}
+
+.card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+  color: #ff9d3d;
+  margin-bottom: 1rem;
+}
+
+.pub {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pub img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.perfil-img img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ff9d3d;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+label {
+  font-weight: bold;
+}
+
+input, select {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.btn {
+  background-color: #ff9d3d;
+  color: #fff;
+  border: none;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #e68a2e;
+}
+
+.mensaje {
+  text-align: center;
+  font-weight: bold;
+}
+
+.mensaje.exito {
+  color: green;
+}
+
+.mensaje.error {
+  color: red;
+}
+
+.acciones a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #fff;
+  background: #ff9d3d;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.acciones a.eliminar {
+  background: #e63946;
+}
