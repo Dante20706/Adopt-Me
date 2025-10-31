@@ -39,7 +39,7 @@ if ($tabla_activa === 'ubicaciones' && isset($_GET['tipo']) && $_GET['tipo'] !==
         }
 
         header {
-            background: linear-gradient(90deg, #36c, #6cf);
+            background: #fdfd96;
             color: white;
             padding: 20px 40px;
             display: flex;
@@ -87,7 +87,7 @@ if ($tabla_activa === 'ubicaciones' && isset($_GET['tipo']) && $_GET['tipo'] !==
         }
 
         .table-selector button.active {
-            background-color: #4a90e2;
+            background-color: #f7bd56;
             color: white;
             border: none;
         }
@@ -107,12 +107,12 @@ if ($tabla_activa === 'ubicaciones' && isset($_GET['tipo']) && $_GET['tipo'] !==
         }
 
         .data-table th {
-            background-color: #f2f2f2;
+            background-color: #f7bd56;
             font-weight: 600;
         }
 
         .data-table tr:hover {
-            background-color: #f9f9f9;
+            background-color: #fdfd96;
         }
 
         .filter-bar {
@@ -130,6 +130,7 @@ if ($tabla_activa === 'ubicaciones' && isset($_GET['tipo']) && $_GET['tipo'] !==
 
 <header>
     <h1>Panel de Administración</h1>
+    <a href="index.php" class="active">Inicio</a>
     <a href="logout.php" class="btn btn-danger">Cerrar sesión</a>
 </header>
 
@@ -198,10 +199,12 @@ if ($tabla_activa === 'ubicaciones' && isset($_GET['tipo']) && $_GET['tipo'] !==
                 <option value="parque">Parque</option>
                 <option value="protectora">Protectora</option>
             </select>
+            <input type="text" name="direccion" id="direccion" placeholder="Direccion" required>
+            <input type="int" name="telefono" id="telefono" placeholder="Teléfono" required>
+            <input type="text" name="horario" placeholder="Horario (ej: 9:00-18:00)">
             <input type="text" name="latitud" id="latitud" placeholder="Latitud" required>
             <input type="text" name="longitud" id="longitud" placeholder="Longitud" required>
-            <input type="text" name="horario" placeholder="Horario (ej: 9:00-18:00)">
-            <textarea name="descripcion" placeholder="Descripción"></textarea>
+            <input type="text" name="sitio_web" id= "sitio_web" placeholder="Sitio Web">
             <button class="btn btn-primary" type="submit">Agregar</button>
         </form>
 

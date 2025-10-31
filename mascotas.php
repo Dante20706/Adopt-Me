@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'conexion.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -104,7 +105,7 @@ session_start();
             <div class="pets-grid" id="petsGrid">
                 <?php
                 // Conexión a la base de datos
-                $conn = new mysqli('localhost', 'root', '', 'prueba');
+                $conn = new mysqli('localhost:3307', 'root', '', 'prueba');
                 if ($conn->connect_error) {
                     die("Conexión fallida: " . $conn->connect_error);
                 }

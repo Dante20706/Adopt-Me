@@ -34,7 +34,10 @@ require 'conexion.php';
                         <li><a href="protectoras.php">Protectoras</a></li>
                         <li><a href="map.php">Mapa</a></li>
                         <li><a href="blog.php">Blog</a></li>
-                    </ul>
+                    <?php if (isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] === 'admin'): ?>
+                        <li><a href="admin.php" class="admin-link"><i class="fas fa-tools"></i> Panel Admin</a></li>
+                    <?php endif; ?>
+                </ul>
                     <div class="nav-buttons">
                         <?php if (isset($_SESSION['usuario_id'])): ?>
                             <a href="profile.php">Hola, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></a>
