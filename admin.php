@@ -265,7 +265,7 @@ if (in_array('ubicaciones', $tablas)) {
         </div>
 
         <!-- EDIT MODAL SIMPLIFICADO -->
-        <div id="editModal" class="card" style="display:none;margin-top:12px">
+        <div id="editModal" class="card">
             <h3>Editar registro</h3>
             <form id="editForm" method="POST" action="admin_acciones.php" class="form-grid">
                 <input type="hidden" name="accion" value="editar">
