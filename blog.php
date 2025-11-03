@@ -8,10 +8,10 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-// Filtro de categoría (opcional)
+// Obtener categoría seleccionada (si existe)
 $categoriaSeleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : null;
 
-// Obtener publicación destacada (última subida)
+// Obtener publicación destacada (última)
 $destacadaQuery = "SELECT p.*, u.nombre AS autor 
                    FROM blog_posts p 
                    JOIN usuarios u ON p.usuario_id = u.id 
@@ -19,24 +19,26 @@ $destacadaQuery = "SELECT p.*, u.nombre AS autor
                    LIMIT 1";
 $destacada = $conn->query($destacadaQuery)->fetch_assoc();
 
-// Obtener publicaciones recientes (excluyendo la destacada)
+// Obtener publicaciones recientes con o sin filtro
 if ($categoriaSeleccionada) {
-    $postsQuery = $conn->prepare("SELECT p.*, u.nombre AS autor 
-                                      FROM blog_posts p 
-                                      JOIN usuarios u ON p.usuario_id = u.id 
-                                      WHERE p.id != ? AND p.categoria = ?
-                                      ORDER BY p.fecha_publicacion DESC");
-    $postsQuery->bind_param("is", $destacada['id'], $categoriaSeleccionada);
+    $query = "SELECT p.*, u.nombre AS autor 
+              FROM blog_posts p 
+              JOIN usuarios u ON p.usuario_id = u.id 
+              WHERE p.id != ? AND p.categoria = ?
+              ORDER BY p.fecha_publicacion DESC";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("is", $destacada['id'], $categoriaSeleccionada);
 } else {
-    $postsQuery = $conn->prepare("SELECT p.*, u.nombre AS autor 
-                                      FROM blog_posts p 
-                                      JOIN usuarios u ON p.usuario_id = u.id 
-                                      WHERE p.id != ?
-                                      ORDER BY p.fecha_publicacion DESC");
-    $postsQuery->bind_param("i", $destacada['id']);
+    $query = "SELECT p.*, u.nombre AS autor 
+              FROM blog_posts p 
+              JOIN usuarios u ON p.usuario_id = u.id 
+              WHERE p.id != ?
+              ORDER BY p.fecha_publicacion DESC";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $destacada['id']);
 }
-$postsQuery->execute();
-$posts = $postsQuery->get_result();
+$stmt->execute();
+$posts = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -53,45 +55,43 @@ $posts = $postsQuery->get_result();
 </head>
 <body>
 
-
 <header class="navbar">
-        <div class="container">
-            <div class="navbar-content">
-                <a href="index.php" class="logo">
-                    <i class="fas fa-paw"></i>
-                    <span>Adopt Me</span>
-                </a>
-                
-                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
-                <nav class="nav-menu" id="navMenu">
-                    <ul class="nav-links">
-                        <li><a href="index.php">Inicio</a></li>
-                        <li><a href="protectoras.php">Protectoras</a></li>
-                        <li><a href="map.php">Mapa</a></li>
-                        <li><a href="blog.php "class="active">Blog</a></li>
-                    </ul>
-                    <div class="nav-buttons">
-                        <?php if (isset($_SESSION['usuario_id'])): ?>
-                            <a href="profile.php">Hola, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></a>
-                            <a href="logout.php" class="btn btn-outline">Cerrar sesión</a>
-                        <?php else: ?>
-                            <a href="login.php" class="btn btn-outline">Iniciar sesión</a>
-                            <a href="register.php" class="btn btn-primary">Registrarse</a>
-                        <?php endif; ?>
-                    </div>
-                </nav>
-            </div>
+    <div class="container">
+        <div class="navbar-content">
+            <a href="index.php" class="logo">
+                <i class="fas fa-paw"></i>
+                <span>Adopt Me</span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="protectoras.php">Protectoras</a></li>
+                    <li><a href="map.php">Mapa</a></li>
+                    <li><a href="blog.php" class="active">Blog</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <?php if (isset($_SESSION['usuario_id'])): ?>
+                        <a href="profile.php">Hola, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></a>
+                        <a href="logout.php" class="btn btn-outline">Cerrar sesión</a>
+                    <?php else: ?>
+                        <a href="login.php" class="btn btn-outline">Iniciar sesión</a>
+                        <a href="register.php" class="btn btn-primary">Registrarse</a>
+                    <?php endif; ?>
+                </div>
+            </nav>
         </div>
-    </header>
+    </div>
+</header>
+
 <main>
     <div class="container">
         <h1>Blog de Adopt Me</h1>
-        <p class="page-description">
-            Historias, consejos y experiencias compartidas por nuestra comunidad.
-        </p>
+        <p class="page-description">Historias, consejos y experiencias compartidas por nuestra comunidad 🐾</p>
 
         <div class="blog-layout">
             <div class="main-content">
@@ -114,45 +114,57 @@ $posts = $postsQuery->get_result();
                     </article>
                 <?php endif; ?>
 
+                <!-- Artículos recientes -->
                 <section class="recent-posts">
-                    <h2>Artículos recientes</h2>
+                    <h2>
+                        <?php echo $categoriaSeleccionada ? "Artículos de " . htmlspecialchars($categoriaSeleccionada) : "Artículos recientes"; ?>
+                    </h2>
+
                     <div class="posts-grid">
-                        <?php while ($post = $posts->fetch_assoc()): ?>
-                            <div class="post-card">
-                                <div class="post-image">
-                                    <img src="<?php echo htmlspecialchars($post['imagen'] ?: 'https://placeimg.com/800/400/animals'); ?>" alt="Imagen de publicación">
-                                </div>
-                                <div class="post-content">
-                                    <span class="post-category"><?php echo htmlspecialchars($post['categoria']); ?></span>
-                                    <h3 class="post-title"><?php echo htmlspecialchars($post['titulo']); ?></h3>
-                                    <p class="post-excerpt"><?php echo nl2br(substr($post['contenido'], 0, 120)) . '...'; ?></p>
-                                    <div class="post-info">
-                                        <span class="post-date"><i class="far fa-calendar"></i> <?php echo date("d M, Y", strtotime($post['fecha_publicacion'])); ?></span>
-                                        <span class="post-author"><i class="far fa-user"></i> <?php echo htmlspecialchars($post['autor']); ?></span>
+                        <?php if ($posts->num_rows > 0): ?>
+                            <?php while ($post = $posts->fetch_assoc()): ?>
+                                <div class="post-card">
+                                    <div class="post-image">
+                                        <img src="<?php echo htmlspecialchars($post['imagen'] ?: 'https://placeimg.com/800/400/animals'); ?>" alt="Imagen de publicación">
+                                    </div>
+                                    <div class="post-content">
+                                        <span class="post-category"><?php echo htmlspecialchars($post['categoria']); ?></span>
+                                        <h3 class="post-title"><?php echo htmlspecialchars($post['titulo']); ?></h3>
+                                        <p class="post-excerpt"><?php echo nl2br(substr($post['contenido'], 0, 120)) . '...'; ?></p>
+                                        <div class="post-info">
+                                            <span class="post-date"><i class="far fa-calendar"></i> <?php echo date("d M, Y", strtotime($post['fecha_publicacion'])); ?></span>
+                                            <span class="post-author"><i class="far fa-user"></i> <?php echo htmlspecialchars($post['autor']); ?></span>
+                                        </div>
+                                    </div>
+                                    <div class="post-footer">
+                                        <a href="blog-post.php?id=<?php echo $post['id']; ?>" class="read-more">Leer artículo completo</a>
                                     </div>
                                 </div>
-                                <div class="post-footer">
-                                    <a href="blog-post.php?id=<?php echo $post['id']; ?>" class="read-more">Leer artículo completo</a>
-                                </div>
-                            </div>
-                        <?php endwhile; ?>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <p class="no-results">No hay publicaciones en esta categoría todavía 🐶</p>
+                        <?php endif; ?>
                     </div>
                 </section>
             </div>
 
+            <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="sidebar-widget categories">
-                    <h3>Categorías</h3>
+                    <h3>Filtrar por categoría</h3>
                     <ul>
                         <?php
                         $categorias = ['Historias', 'Noticias', 'Consejos', 'Educación', 'Otros'];
                         foreach ($categorias as $cat):
                         ?>
-                            <li><a href="?categoria=<?php echo urlencode($cat); ?>" class="<?php echo $categoriaSeleccionada === $cat ? 'active' : ''; ?>">
-                                <?php echo htmlspecialchars($cat); ?>
-                            </a></li>
+                            <li>
+                                <a href="?categoria=<?php echo urlencode($cat); ?>"
+                                   class="categoria-btn <?php echo $categoriaSeleccionada === $cat ? 'active' : ''; ?>">
+                                   <?php echo htmlspecialchars($cat); ?>
+                                </a>
+                            </li>
                         <?php endforeach; ?>
-                        <li><a href="blog.php">Mostrar todas</a></li>
+                        <li><a href="blog.php" class="categoria-btn <?php echo !$categoriaSeleccionada ? 'active' : ''; ?>">Mostrar todas</a></li>
                     </ul>
                 </div>
 
@@ -175,56 +187,8 @@ $posts = $postsQuery->get_result();
 
 <footer class="footer">
     <div class="container">
-        <div class="footer-content">
-            <div class="footer-column">
-                <div class="footer-logo">
-                    <i class="fas fa-paw"></i>
-                    <span>Adopt Me</span>
-                </div>
-                <p>Conectando mascotas con familias amorosas desde 2025.</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Enlaces rápidos</h3>
-                <ul>
-                    <li><a href="index.php">Inicio</a></li>
-                    <li><a href="protectoras.php">Protectoras</a></li>
-                    <li><a href="map.php">Mapa interactivo</a></li>
-                    <li><a href="blog.php">Blog</a></li>
-                    <li><a href="mascotas.php">Adoptar</a></li>
-                    <li><a href="publicaciones.php">Dar en adopción</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Recursos</h3>
-                <ul>
-                    <li><a href="#">Guía de adopción</a></li>
-                    <li><a href="#">Cuidados básicos</a></li>
-                    <li><a href="#">Veterinarias</a></li>
-                    <li><a href="#">Protectoras</a></li>
-                    <li><a href="#">Preguntas frecuentes</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Contacto</h3>
-                <ul class="contact-info">
-                    <li>info@adoptme.com</li>
-                    <li>+54 387 123-4567</li>
-                    <li>Av. Belgrano 123, Salta Capital</li>
-                </ul>
-            </div>
-        </div>
-        
         <div class="footer-bottom">
-            <p>&copy; 2025 Adopt Me. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Adopt Me - Comunidad de adopción y cuidado animal</p>
         </div>
     </div>
 </footer>

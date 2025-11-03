@@ -300,7 +300,7 @@ $puede_adoptar = isset($_SESSION['usuario_id']) && ($_SESSION['usuario_tipo'] ??
 
                 <div class="adoption-button-section">
                     <?php if($puede_adoptar): ?>
-                        <form action="adopt.php" method="POST">
+                        <form action="adoptar.php" method="POST">
                             <input type="hidden" name="publicacion_id" value="<?php echo $publicacion['id']; ?>">
                             <button type="submit" class="btn-adopt">¡Quiero Adoptarlo!</button>
                         </form>

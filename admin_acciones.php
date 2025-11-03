@@ -38,7 +38,7 @@ if ($accion === 'agregar_ubicacion') {
 if ($accion === 'eliminar') {
     $tabla = $_POST['tabla'] ?? '';
     $id = $_POST['id'] ?? '';
-    if (!in_array($tabla, ['usuarios','publicaciones','imagenes','imagen_principal','imagen_perfil','ubicaciones'])) {
+    if (!in_array($tabla, ['usuarios','publicaciones','blog_posts','newsletter','ubicaciones'])) {
         $_SESSION['admin_msg'] = 'Tabla no permitida';
         header("Location: admin.php");
         exit;

@@ -1,0 +1,112 @@
+/* Reset general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #fafafa;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* Contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: white;
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.descripcion {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Formulario */
+.form-blog {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input[type="text"],
+.form-group select,
+.form-group textarea,
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Botones */
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-primary {
+    background: #4CAF50;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: #43a047;
+    transform: scale(1.05);
+}
+
+.btn-cancelar {
+    background: #ddd;
+    color: #333;
+    font-weight: 500;
+}
+
+.btn-cancelar:hover {
+    background: #bbb;
+    transform: scale(1.05);
+}
+
+
