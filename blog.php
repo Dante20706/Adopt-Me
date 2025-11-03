@@ -54,6 +54,38 @@ $posts = $postsQuery->get_result();
 <body>
 
 
+<header class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="index.php" class="logo">
+                    <i class="fas fa-paw"></i>
+                    <span>Adopt Me</span>
+                </a>
+                
+                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="nav-menu" id="navMenu">
+                    <ul class="nav-links">
+                        <li><a href="index.php">Inicio</a></li>
+                        <li><a href="protectoras.php">Protectoras</a></li>
+                        <li><a href="map.php">Mapa</a></li>
+                        <li><a href="blog.php "class="active">Blog</a></li>
+                    </ul>
+                    <div class="nav-buttons">
+                        <?php if (isset($_SESSION['usuario_id'])): ?>
+                            <a href="profile.php">Hola, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></a>
+                            <a href="logout.php" class="btn btn-outline">Cerrar sesión</a>
+                        <?php else: ?>
+                            <a href="login.php" class="btn btn-outline">Iniciar sesión</a>
+                            <a href="register.php" class="btn btn-primary">Registrarse</a>
+                        <?php endif; ?>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
 <main>
     <div class="container">
         <h1>Blog de Adopt Me</h1>
@@ -127,7 +159,7 @@ $posts = $postsQuery->get_result();
                 <div class="sidebar-widget newsletter">
                     <h3>Únete a nuestra newsletter</h3>
                     <p>Recibe las mejores historias y consejos sobre el cuidado de mascotas.</p>
-                    <form class="newsletter-form" action="suscribir.php" method="POST">
+                    <form class="newsletter-form" action="newsletter_guardar.php" method="POST">
                         <input type="email" name="email" placeholder="Tu correo electrónico" required>
                         <button type="submit" class="btn btn-primary">Suscribirme</button>
                     </form>
@@ -141,6 +173,61 @@ $posts = $postsQuery->get_result();
     </div>
 </main>
 
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <i class="fas fa-paw"></i>
+                    <span>Adopt Me</span>
+                </div>
+                <p>Conectando mascotas con familias amorosas desde 2025.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Enlaces rápidos</h3>
+                <ul>
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="protectoras.php">Protectoras</a></li>
+                    <li><a href="map.php">Mapa interactivo</a></li>
+                    <li><a href="blog.php">Blog</a></li>
+                    <li><a href="mascotas.php">Adoptar</a></li>
+                    <li><a href="publicaciones.php">Dar en adopción</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Recursos</h3>
+                <ul>
+                    <li><a href="#">Guía de adopción</a></li>
+                    <li><a href="#">Cuidados básicos</a></li>
+                    <li><a href="#">Veterinarias</a></li>
+                    <li><a href="#">Protectoras</a></li>
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <ul class="contact-info">
+                    <li>info@adoptme.com</li>
+                    <li>+54 387 123-4567</li>
+                    <li>Av. Belgrano 123, Salta Capital</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Adopt Me. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>

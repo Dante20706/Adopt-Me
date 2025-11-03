@@ -78,12 +78,7 @@ $relacionadosResult = $relacionados->get_result();
 
 <main>
     <div class="container">
-        <!-- Breadcrumb -->
-        <nav class="breadcrumb">
-            <a href="index.php">Inicio</a> <span>/</span>
-            <a href="blog.php">Blog</a> <span>/</span>
-            <span><?php echo htmlspecialchars($post['titulo']); ?></span>
-        </nav>
+        
 
         <!-- Artículo principal -->
         <article class="blog-post">
@@ -139,7 +134,7 @@ $relacionadosResult = $relacionados->get_result();
             <div class="newsletter-content">
                 <h3>¿Te gustó este artículo?</h3>
                 <p>Suscríbete a nuestro newsletter para recibir más consejos sobre el cuidado de mascotas</p>
-                <form class="newsletter-form" action="suscribir.php" method="POST">
+                <form class="newsletter-form" action="newsletter_guardar.php" method="POST">
                     <input type="email" name="email" placeholder="Tu correo electrónico" required>
                     <button type="submit" class="btn btn-primary">Suscribirme</button>
                 </form>

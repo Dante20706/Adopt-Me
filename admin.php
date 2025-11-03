@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['usuario_tipo']) || $_SE
 }
 
 // Tablas administrables
-$tablas = ['usuarios', 'publicaciones', 'imagenes', 'imagen_principal', 'imagen_perfil', 'ubicaciones'];
+$tablas = ['usuarios', 'publicaciones','blog_posts','newsletter', 'ubicaciones'];
 
 // Tabla activa
 $tabla_activa = (isset($_GET['tabla']) && in_array($_GET['tabla'], $tablas)) ? $_GET['tabla'] : 'usuarios';
